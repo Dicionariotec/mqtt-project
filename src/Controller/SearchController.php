@@ -14,8 +14,7 @@ class SearchController extends AbstractController
     #[Route('/search', name: 'app_search')]
     public function index(Request $request): Response
     {
-        $defaultData = ['message' => 'Digite o que você procura'];
-        $form = $this->createFormBuilder($defaultData)
+        $form = $this->createFormBuilder()
             ->add('keyword', TextType::class, [
                 'label' => 'Digite aqui para pesquisar',
                 'attr' => [
