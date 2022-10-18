@@ -40,14 +40,15 @@ class SearchController extends AbstractController
 
         return $this->renderForm('search/search.html.twig', [
             'form' => $form,
-            'results' => []
+            'results' => ''
         ]);
     }
 
     private function runElasticSearch(array $data) {
         $client = ClientBuilder::create()
-            ->setElasticCloudId('dicionariotec:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvJDk0NDViYzczMWQxNDRkODZiYmJmZTQ4ZmRlNTg3MjgxJGY4OWI3NjgzYTY4YzRjYzZiZTlkYmRlZWIyNTA3Y2E2')
-            ->setApiKey('SmNzSDRJTUJYcjdpeHdzY3RkOEs6MVZwMFR0aW1TNGlrU3hCekROMEhfQQ==')
+            ->setHosts(['https://localhost:9200'])
+            ->setBasicAuthentication('elastic', 'elastic')
+            ->setCABundle($_ENV['ELASTIC_HTTP_CA_PATH'])
             ->build();
 
         // Info API
